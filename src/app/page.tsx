@@ -58,6 +58,18 @@ export default function Home() {
           },
         }}
       />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: SITE_NAME,
+          url: SITE_URL,
+          applicationCategory: "TravelApplication",
+          operatingSystem: "Any",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          description: SITE_TAGLINE,
+        }}
+      />
     </main>
   );
 }

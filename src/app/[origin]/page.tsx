@@ -6,6 +6,7 @@ import { offsetDifferenceHours, formatHourOffset } from "@/lib/timezone";
 import { estimateFlight, formatDuration } from "@/lib/geo";
 import { getScheduledMinutes } from "@/lib/flight-durations";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
+import { getGeneratedAt } from "@/lib/enrichment";
 import JsonLd from "@/components/JsonLd";
 
 export function generateStaticParams() {
@@ -20,10 +21,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { origin: originSlug } = await params;
   const origin = citiesBySlug[originSlug];
   if (!origin) return {};
-  const title = `Flight Time & Time Difference from ${origin.name} — All Destinations`;
-  const description = `Flight duration and time-zone difference from ${origin.name} to ${cities.length - 1} major cities worldwide.`;
+  const title = `Flight Time & Time Difference from ${origin.name} (${origin.iata}) — ${cities.length - 1} Destinations`;
+  const description = `Flight duration and time-zone difference from ${origin.name} (${origin.timezone.replace("_", " ")}, UTC-relative) to ${cities.length - 1} major cities worldwide, with live local time and best call windows for each.`;
   const url = `${SITE_URL}/${origin.slug}`;
-  return { title, description, alternates: { canonical: url }, openGraph: { title, description, url, siteName: SITE_NAME } };
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, siteName: SITE_NAME, modifiedTime: getGeneratedAt() },
+  };
 }
 
 export default async function OriginHubPage({ params }: PageProps) {
@@ -77,6 +83,15 @@ export default async function OriginHubPage({ params }: PageProps) {
         ))}
       </ul>
 
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: `Flight time from ${origin.name}`,
+          url: `${SITE_URL}/${origin.slug}`,
+          dateModified: getGeneratedAt(),
+        }}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",

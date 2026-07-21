@@ -20,6 +20,7 @@ export interface PairFacts {
   callWindow: ReturnType<typeof bestTimeToCall>;
   directAnswer: string;
   intro: string;
+  metaDescription: string;
   currencyNote: { amount: number; converted: number | null };
   originHoliday: ReturnType<typeof nextHoliday>;
   destinationHoliday: ReturnType<typeof nextHoliday>;
@@ -39,16 +40,20 @@ export function computePairFacts(origin: City, destination: City): PairFacts {
   )}; ${destination.name} is ${offsetPhrase} ${origin.name}${offsetHours === 0 ? "" : ""}.`;
 
   const intro =
-    offsetHours === 0
-      ? introSentence(origin.name, destination.name)
-      : callWindow.hasOverlap
-      ? introSentence(origin.name, destination.name)
-      : noOverlapSentence(origin.name, destination.name, offsetHours);
+    offsetHours !== 0 && !callWindow.hasOverlap
+      ? noOverlapSentence(origin.name, destination.name, offsetHours)
+      : introSentence(origin.name, destination.name, offsetHours);
 
   const amount = 100;
   const converted = hasCurrencyData(origin.currency) && hasCurrencyData(destination.currency)
     ? convert(amount, origin.currency, destination.currency)
     : null;
+
+  const metaDescription = `${origin.name} to ${destination.name}: ${formatDuration(
+    durationMinutes
+  )} flight, ${geo.distanceKm.toLocaleString()} km. ${destination.name} is ${offsetPhrase} ${
+    origin.name
+  }. Live local time, DST status, and the best hours to call — updated automatically.`;
 
   return {
     origin,
@@ -65,6 +70,7 @@ export function computePairFacts(origin: City, destination: City): PairFacts {
     callWindow,
     directAnswer,
     intro,
+    metaDescription,
     currencyNote: { amount, converted },
     originHoliday: nextHoliday(origin.countryCode),
     destinationHoliday: nextHoliday(destination.countryCode),

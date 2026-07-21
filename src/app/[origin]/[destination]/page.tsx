@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cities, citiesBySlug } from "@/data/cities";
 import { computePairFacts } from "@/lib/pair-facts";
+import { faqQuestion } from "@/lib/content";
+import { getGeneratedAt } from "@/lib/enrichment";
+import { estimateFlight, formatDuration } from "@/lib/geo";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Faq from "@/components/Faq";
@@ -37,15 +40,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pair = loadPair(originSlug, destinationSlug);
   if (!pair) return {};
   const { origin, destination } = pair;
-  const title = `Flight Time from ${origin.name} to ${destination.name} — Time Difference & Best Call Times`;
-  const description = `How long is the flight from ${origin.name} to ${destination.name}? See flight duration, live local time in both cities, the time-zone gap, and the best hours to call.`;
+  const facts = computePairFacts(origin, destination);
+  const title = `${origin.name} to ${destination.name}: ${facts.durationLabel} Flight Time & ${Math.abs(
+    facts.offsetHours
+  )}h Time Difference`;
   const url = `${SITE_URL}/${origin.slug}/${destination.slug}`;
   return {
     title,
-    description,
+    description: facts.metaDescription,
     alternates: { canonical: url },
-    openGraph: { title, description, url, siteName: SITE_NAME, type: "article" },
+    openGraph: {
+      title,
+      description: facts.metaDescription,
+      url,
+      siteName: SITE_NAME,
+      type: "article",
+      modifiedTime: getGeneratedAt(),
+    },
   };
+}
+
+/** Five other destinations from the same origin, picked deterministically by population rank offset from this destination — gives every page a distinct set of internal links instead of the same top-5 everywhere. */
+function relatedDestinations(originSlug: string, destinationSlug: string) {
+  const others = cities
+    .filter((c) => c.slug !== originSlug && c.slug !== destinationSlug)
+    .sort((a, b) => b.population - a.population);
+  const offset = destinationSlug.length % Math.max(others.length - 5, 1);
+  return others.slice(offset, offset + 5);
 }
 
 export default async function CityPairPage({ params }: PageProps) {
@@ -54,21 +75,22 @@ export default async function CityPairPage({ params }: PageProps) {
   if (!pair) notFound();
   const { origin, destination } = pair;
   const facts = computePairFacts(origin, destination);
+  const related = relatedDestinations(origin.slug, destination.slug);
 
   const faqItems = [
     {
-      question: `What is the time difference between ${origin.name} and ${destination.name}?`,
+      question: faqQuestion("timeDiff", origin.name, destination.name),
       answer: `${destination.name} is ${facts.offsetPhrase} ${origin.name}. Right now it's ${facts.originNow.formatted} in ${origin.name} and ${facts.destinationNow.formatted} in ${destination.name}.`,
     },
     {
-      question: `How long is the flight from ${origin.name} to ${destination.name}?`,
+      question: faqQuestion("flightTime", origin.name, destination.name),
       answer:
         facts.durationSource === "scheduled"
           ? `Typical scheduled flights from ${origin.name} to ${destination.name} take around ${facts.durationLabel}, covering a great-circle distance of about ${facts.distanceKm.toLocaleString()} km (${facts.distanceMiles.toLocaleString()} mi).`
           : `Based on the great-circle distance of about ${facts.distanceKm.toLocaleString()} km (${facts.distanceMiles.toLocaleString()} mi) and typical cruise speed, a nonstop flight from ${origin.name} to ${destination.name} would take an estimated ${facts.durationLabel}. This is an estimate, not a live schedule — actual routings and wind can shift it.`,
     },
     {
-      question: `What is the best time to call ${destination.name} from ${origin.name}?`,
+      question: faqQuestion("call", origin.name, destination.name),
       answer: facts.callWindow.hasOverlap
         ? `Call between ${facts.callWindow.originLocalRange} your time in ${origin.name} — that lands at ${facts.callWindow.destinationLocalRange} in ${destination.name}, inside standard business hours on both ends.`
         : `${origin.name} and ${destination.name} don't share standard 9am–6pm business hours, so plan for one side to take the call early morning or evening.`,
@@ -92,7 +114,9 @@ export default async function CityPairPage({ params }: PageProps) {
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
           {origin.name} to {destination.name}: Flight Time & Time Difference
         </h1>
-        <p className="mt-3 text-lg font-medium text-blue-700 dark:text-blue-400">{facts.directAnswer}</p>
+        <p id="direct-answer" className="mt-3 text-lg font-medium text-blue-700 dark:text-blue-400">
+          {facts.directAnswer}
+        </p>
         <p className="mt-2 text-zinc-600 dark:text-zinc-300">{facts.intro}</p>
       </div>
 
@@ -212,6 +236,30 @@ export default async function CityPairPage({ params }: PageProps) {
 
       <AffiliateLinks destination={destination} />
 
+      <section>
+        <h2 className="mb-3 text-sm font-semibold text-zinc-500 dark:text-zinc-400">
+          Other popular routes from {origin.name}
+        </h2>
+        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          {related.map((c) => {
+            const relGeo = estimateFlight(origin.lat, origin.lon, c.lat, c.lon);
+            return (
+              <li key={c.slug}>
+                <Link
+                  href={`/${origin.slug}/${c.slug}`}
+                  className="block rounded-md border border-black/10 px-3 py-2 text-sm hover:border-blue-500 dark:border-white/10"
+                >
+                  {origin.name} → {c.name}
+                  <span className="block text-xs text-zinc-500 dark:text-zinc-400">
+                    {formatDuration(relGeo.durationMinutes)}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
       <p className="text-sm text-zinc-500 dark:text-zinc-400">
         Going the other way?{" "}
         <Link href={`/${destination.slug}/${origin.slug}`} className="text-blue-600 hover:underline dark:text-blue-400">
@@ -220,6 +268,19 @@ export default async function CityPairPage({ params }: PageProps) {
         .
       </p>
 
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: `${origin.name} to ${destination.name}: Flight Time & Time Difference`,
+          url: `${SITE_URL}/${origin.slug}/${destination.slug}`,
+          dateModified: getGeneratedAt(),
+          speakable: {
+            "@type": "SpeakableSpecification",
+            cssSelector: ["#direct-answer"],
+          },
+        }}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -242,7 +303,20 @@ export default async function CityPairPage({ params }: PageProps) {
           "@type": "Dataset",
           name: `Flight time and time-zone data: ${origin.name} to ${destination.name}`,
           description: facts.directAnswer,
+          dateModified: getGeneratedAt(),
           variableMeasured: ["flight duration", "time-zone offset", "distance"],
+          about: [
+            {
+              "@type": "City",
+              name: origin.name,
+              geo: { "@type": "GeoCoordinates", latitude: origin.lat, longitude: origin.lon },
+            },
+            {
+              "@type": "City",
+              name: destination.name,
+              geo: { "@type": "GeoCoordinates", latitude: destination.lat, longitude: destination.lon },
+            },
+          ],
         }}
       />
     </main>
