@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 interface WeatherState {
   temperatureC: number;
   label: string;
+  icon: string;
 }
 
 const WEATHER_CODE_LABELS: Record<number, string> = {
@@ -25,6 +26,26 @@ const WEATHER_CODE_LABELS: Record<number, string> = {
   75: "Heavy snow",
   80: "Rain showers",
   95: "Thunderstorm",
+};
+
+const WEATHER_CODE_ICONS: Record<number, string> = {
+  0: "☀️",
+  1: "🌤️",
+  2: "⛅",
+  3: "☁️",
+  45: "🌫️",
+  48: "🌫️",
+  51: "🌦️",
+  53: "🌦️",
+  55: "🌧️",
+  61: "🌧️",
+  63: "🌧️",
+  65: "🌧️",
+  71: "🌨️",
+  73: "🌨️",
+  75: "❄️",
+  80: "🌦️",
+  95: "⛈️",
 };
 
 /**
@@ -51,6 +72,7 @@ export default function WeatherWidget({ lat, lon }: { lat: number; lon: number }
         setState({
           temperatureC: data.current.temperature_2m,
           label: WEATHER_CODE_LABELS[data.current.weather_code] ?? "—",
+          icon: WEATHER_CODE_ICONS[data.current.weather_code] ?? "🌡️",
         });
       })
       .catch(() => {
@@ -69,7 +91,7 @@ export default function WeatherWidget({ lat, lon }: { lat: number; lon: number }
   }
   return (
     <span>
-      {Math.round(state.temperatureC)}°C, {state.label}
+      {state.icon} {Math.round(state.temperatureC)}°C, {state.label}
     </span>
   );
 }

@@ -12,6 +12,9 @@ import Faq from "@/components/Faq";
 import WeatherWidget from "@/components/WeatherWidget";
 import AffiliateLinks from "@/components/AffiliateLinks";
 import AdSlot from "@/components/AdSlot";
+import RouteMap from "@/components/RouteMap";
+import CallWindowChart from "@/components/CallWindowChart";
+import InteractiveMap from "@/components/InteractiveMap";
 
 export function generateStaticParams() {
   const params: { origin: string; destination: string }[] = [];
@@ -125,7 +128,10 @@ export default async function CityPairPage({ params }: PageProps) {
           <h2 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">
             {origin.name} ({origin.iata}) — now
           </h2>
-          <p className="mt-1 text-xl font-semibold">{facts.originNow.formatted}</p>
+          <p className="mt-1 text-xl font-semibold">
+            {facts.originNow.hourOfDay >= 6 && facts.originNow.hourOfDay < 18 ? "☀️" : "🌙"}{" "}
+            {facts.originNow.formatted}
+          </p>
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
             {facts.originNow.offsetLabel} · {facts.originNow.isDST ? "Daylight saving time" : "Standard time"}
           </p>
@@ -137,7 +143,10 @@ export default async function CityPairPage({ params }: PageProps) {
           <h2 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">
             {destination.name} ({destination.iata}) — now
           </h2>
-          <p className="mt-1 text-xl font-semibold">{facts.destinationNow.formatted}</p>
+          <p className="mt-1 text-xl font-semibold">
+            {facts.destinationNow.hourOfDay >= 6 && facts.destinationNow.hourOfDay < 18 ? "☀️" : "🌙"}{" "}
+            {facts.destinationNow.formatted}
+          </p>
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
             {facts.destinationNow.offsetLabel} ·{" "}
             {facts.destinationNow.isDST ? "Daylight saving time" : "Standard time"}
@@ -146,6 +155,26 @@ export default async function CityPairPage({ params }: PageProps) {
             <WeatherWidget lat={destination.lat} lon={destination.lon} />
           </p>
         </div>
+      </section>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">Route map</h2>
+        <RouteMap
+          originLat={origin.lat}
+          originLon={origin.lon}
+          originLabel={`${origin.name} (${origin.iata})`}
+          destinationLat={destination.lat}
+          destinationLon={destination.lon}
+          destinationLabel={`${destination.name} (${destination.iata})`}
+        />
+        <InteractiveMap
+          originLat={origin.lat}
+          originLon={origin.lon}
+          originLabel={`${origin.name} (${origin.iata})`}
+          destinationLat={destination.lat}
+          destinationLon={destination.lon}
+          destinationLabel={`${destination.name} (${destination.iata})`}
+        />
       </section>
 
       <section className="rounded-lg border border-black/10 p-4 dark:border-white/10">
@@ -170,6 +199,14 @@ export default async function CityPairPage({ params }: PageProps) {
             No overlap between standard 9am–6pm business hours — one side will need to take the call off-hours.
           </p>
         )}
+        <div className="mt-4">
+          <CallWindowChart
+            callWindow={facts.callWindow}
+            originLabel={origin.name}
+            destinationLabel={destination.name}
+            originNowHour={facts.originNow.hourOfDay}
+          />
+        </div>
       </section>
 
       <section className="overflow-x-auto rounded-lg border border-black/10 dark:border-white/10">

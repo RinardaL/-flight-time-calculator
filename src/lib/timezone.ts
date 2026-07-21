@@ -8,6 +8,7 @@ export interface ZoneSnapshot {
   offsetLabel: string; // e.g. "UTC+05:30"
   isDST: boolean;
   abbreviation: string;
+  hourOfDay: number; // fractional local hour, 0-24, for chart rendering
 }
 
 export function snapshotZone(zone: string, at?: DateTime): ZoneSnapshot {
@@ -27,6 +28,7 @@ export function snapshotZone(zone: string, at?: DateTime): ZoneSnapshot {
     offsetLabel: `UTC${sign}${h}:${m}`,
     isDST: dt.isInDST,
     abbreviation: dt.offsetNameShort ?? "",
+    hourOfDay: dt.hour + dt.minute / 60,
   };
 }
 
@@ -48,6 +50,10 @@ export interface CallWindow {
   hasOverlap: boolean;
   originLocalRange: string;
   destinationLocalRange: string;
+  /** Destination's 9am-6pm business band, expressed as hours (0-24, may exceed the range) on origin's local clock — for chart rendering. */
+  destinationBandInOriginHours: [number, number];
+  /** Overlap window, in origin-local hours (0-24) — for chart rendering. */
+  overlapInOriginHours: [number, number] | null;
 }
 
 /**
@@ -67,12 +73,15 @@ export function bestTimeToCall(zoneA: string, zoneB: string): CallWindow {
 
   const overlapStart = Math.max(WORK_START, bStartInA);
   const overlapEnd = Math.min(WORK_END, bEndInA);
+  const destinationBandInOriginHours: [number, number] = [bStartInA, bEndInA];
 
   if (overlapEnd - overlapStart < 0.5) {
     return {
       hasOverlap: false,
       originLocalRange: "",
       destinationLocalRange: "",
+      destinationBandInOriginHours,
+      overlapInOriginHours: null,
     };
   }
 
@@ -89,5 +98,7 @@ export function bestTimeToCall(zoneA: string, zoneB: string): CallWindow {
     hasOverlap: true,
     originLocalRange: `${fmt(overlapStart)}–${fmt(overlapEnd)}`,
     destinationLocalRange: `${fmt(overlapStart + diffHours)}–${fmt(overlapEnd + diffHours)}`,
+    destinationBandInOriginHours,
+    overlapInOriginHours: [overlapStart, overlapEnd],
   };
 }

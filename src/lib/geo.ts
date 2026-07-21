@@ -44,6 +44,49 @@ export function estimateFlight(
   return { distanceKm: Math.round(distanceKm), distanceMiles: Math.round(distanceMiles), durationMinutes };
 }
 
+/**
+ * Points along the great-circle arc between two coordinates, via spherical
+ * interpolation (slerp) on unit vectors — used to draw a realistic curved
+ * flight path on the map instead of a straight (incorrect) line.
+ */
+export function greatCirclePoints(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number,
+  segments = 64
+): [number, number][] {
+  const toVec = (lat: number, lon: number) => {
+    const φ = toRadians(lat);
+    const λ = toRadians(lon);
+    return [Math.cos(φ) * Math.cos(λ), Math.cos(φ) * Math.sin(λ), Math.sin(φ)];
+  };
+  const [x1, y1, z1] = toVec(lat1, lon1);
+  const [x2, y2, z2] = toVec(lat2, lon2);
+  const dot = Math.max(-1, Math.min(1, x1 * x2 + y1 * y2 + z1 * z2));
+  const theta = Math.acos(dot);
+
+  if (theta < 1e-9) return [[lat1, lon1]];
+
+  const points: [number, number][] = [];
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const a = Math.sin((1 - t) * theta) / Math.sin(theta);
+    const b = Math.sin(t * theta) / Math.sin(theta);
+    const x = a * x1 + b * x2;
+    const y = a * y1 + b * y2;
+    const z = a * z1 + b * z2;
+    const lat = toDegrees(Math.atan2(z, Math.sqrt(x * x + y * y)));
+    const lon = toDegrees(Math.atan2(y, x));
+    points.push([lat, lon]);
+  }
+  return points;
+}
+
+function toDegrees(rad: number): number {
+  return (rad * 180) / Math.PI;
+}
+
 export function formatDuration(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
