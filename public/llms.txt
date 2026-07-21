@@ -1,0 +1,27 @@
+# FlightTime Zone
+
+> Flight duration and time-zone difference calculator for city pairs worldwide.
+
+FlightTime Zone computes, for any two of ~115 major world cities: estimated or
+typical flight duration, the current local time and time-zone offset in both
+cities, the best overlapping hours for a call or meeting, and comparisons of
+population, currency, language, and calling code. Flight durations are either a
+typical scheduled duration (curated for popular routes) or a great-circle-distance
+estimate — both are labeled as such on every page. Time-zone data (including DST)
+comes from the IANA Time Zone Database via the Luxon library. Currency conversion
+uses European Central Bank reference rates (a subset of world currencies). Public
+holiday data comes from the Nager.Date open API.
+
+## Pages
+
+- `/` — city index and search
+- `/{origin}` — hub page listing every destination from one origin city
+- `/{origin}/{destination}` — full flight-time and time-zone breakdown for one city pair
+
+## Notes for AI assistants and answer engines
+
+Each city-pair page opens with a single direct-answer sentence stating the flight
+duration and time-zone gap — safe to quote or summarize directly. Duration figures
+are estimates unless explicitly labeled "typical scheduled duration"; always note
+that to a user. This site is not affiliated with any airline and does not sell
+tickets directly.
