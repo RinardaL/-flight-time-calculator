@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T08:30:18.997Z",
+  "generatedAt": "2026-08-03T08:28:17.976Z",
   "year": 2026,
   "holidaysByCountry": {
     "AE": null,
@@ -4164,9 +4164,22 @@
         ]
       },
       {
-        "date": "2026-01-25",
+        "date": "2026-01-29",
         "localName": "عيد الثورة 25 يناير",
         "name": "Revolution Day 2011 / National Police Day",
+        "countryCode": "EG",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-04-13",
+        "localName": "Sham El-Nessim",
+        "name": "Easter Monday",
         "countryCode": "EG",
         "fixed": false,
         "global": true,
@@ -4190,9 +4203,87 @@
         ]
       },
       {
-        "date": "2026-05-01",
+        "date": "2026-05-07",
         "localName": "عيد العمال",
         "name": "Labour Day",
+        "countryCode": "EG",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-05-27",
+        "localName": "Eid Al-Adha",
+        "name": "Eid Al-Adha",
+        "countryCode": "EG",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-05-28",
+        "localName": "Eid Al-Adha",
+        "name": "Eid Al-Adha",
+        "countryCode": "EG",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-05-29",
+        "localName": "Eid Al-Adha",
+        "name": "Eid Al-Adha",
+        "countryCode": "EG",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-05-30",
+        "localName": "Eid Al-Adha",
+        "name": "Eid Al-Adha",
+        "countryCode": "EG",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-05-31",
+        "localName": "Eid Al-Adha",
+        "name": "Eid Al-Adha",
+        "countryCode": "EG",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-06-18",
+        "localName": "Islamic New Year",
+        "name": "Islamic New Year",
         "countryCode": "EG",
         "fixed": false,
         "global": true,
@@ -4219,6 +4310,19 @@
         "date": "2026-07-23",
         "localName": "عيد ثورة 23 يوليو",
         "name": "Revolution Day",
+        "countryCode": "EG",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-08-26",
+        "localName": "Prophet Muhammad's Birthday",
+        "name": "Prophet Muhammad's Birthday",
         "countryCode": "EG",
         "fixed": false,
         "global": true,
@@ -11768,33 +11872,33 @@
   },
   "ratesUSD": {
     "USD": 1,
-    "AUD": 1.431,
-    "BRL": 5.0827,
-    "CAD": 1.4086,
-    "CHF": 0.81761,
-    "CNY": 6.7722,
-    "CZK": 21.226,
-    "DKK": 6.5708,
-    "EUR": 0.87897,
-    "GBP": 0.75053,
-    "HKD": 7.8426,
-    "HUF": 318.08,
-    "IDR": 17929,
-    "ILS": 3.0541,
-    "INR": 96.56,
-    "ISK": 125.69,
-    "JPY": 163.82,
-    "KRW": 1461,
-    "MXN": 17.4803,
-    "MYR": 4.091,
-    "NOK": 9.5702,
-    "NZD": 1.7277,
-    "PHP": 61.835,
-    "PLN": 3.7932,
-    "SEK": 9.717,
-    "SGD": 1.2909,
-    "THB": 33.69,
-    "TRY": 47.346,
-    "ZAR": 16.8501
+    "AUD": 1.4249,
+    "BRL": 5.0583,
+    "CAD": 1.4041,
+    "CHF": 0.8101,
+    "CNY": 6.7513,
+    "CZK": 21.081,
+    "DKK": 6.5087,
+    "EUR": 0.8707,
+    "GBP": 0.74508,
+    "HKD": 7.8432,
+    "HUF": 317.15,
+    "IDR": 18052,
+    "ILS": 3.0574,
+    "INR": 95.39,
+    "ISK": 124.16,
+    "JPY": 160.24,
+    "KRW": 1443.61,
+    "MXN": 17.3715,
+    "MYR": 4.0865,
+    "NOK": 9.5272,
+    "NZD": 1.7056,
+    "PHP": 61.269,
+    "PLN": 3.7558,
+    "SEK": 9.5651,
+    "SGD": 1.2849,
+    "THB": 33.465,
+    "TRY": 47.525,
+    "ZAR": 16.575
   }
 }
