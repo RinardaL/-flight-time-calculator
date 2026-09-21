@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T10:20:21.218Z",
+  "generatedAt": "2026-09-21T10:24:53.853Z",
   "year": 2026,
   "holidaysByCountry": {
     "AE": null,
@@ -9220,19 +9220,6 @@
       {
         "date": "2026-04-02",
         "localName": "Jueves Santo",
-        "name": "Holy Thursday",
-        "countryCode": "PE",
-        "fixed": false,
-        "global": true,
-        "counties": null,
-        "launchYear": null,
-        "types": [
-          "Public"
-        ]
-      },
-      {
-        "date": "2026-04-02",
-        "localName": "Jueves Santo",
         "name": "Maundy Thursday",
         "countryCode": "PE",
         "fixed": false,
@@ -9272,7 +9259,7 @@
       {
         "date": "2026-05-01",
         "localName": "Día del Trabajo",
-        "name": "International Workers' Day",
+        "name": "Labour Day",
         "countryCode": "PE",
         "fixed": false,
         "global": true,
@@ -9286,6 +9273,19 @@
         "date": "2026-06-29",
         "localName": "Día de San Pedro y San Pablo",
         "name": "Saint Peter and Saint Paul",
+        "countryCode": "PE",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-07-23",
+        "localName": "Día de la Fuerza Aérea",
+        "name": "Air Force Day",
         "countryCode": "PE",
         "fixed": false,
         "global": true,
@@ -9322,8 +9322,21 @@
         ]
       },
       {
+        "date": "2026-08-06",
+        "localName": "Batalla de Junin",
+        "name": "Battle of Junin",
+        "countryCode": "PE",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
         "date": "2026-08-30",
-        "localName": "Día de Santa Rosa de Lima",
+        "localName": "Santa Rosa de Lima",
         "name": "Santa Rosa de Lima",
         "countryCode": "PE",
         "fixed": false,
@@ -9364,6 +9377,19 @@
         "date": "2026-12-08",
         "localName": "Inmaculada Concepción",
         "name": "Immaculate Conception",
+        "countryCode": "PE",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
+        "date": "2026-12-09",
+        "localName": "Batalla de Ayacucho",
+        "name": "Battle of Ayacucho",
         "countryCode": "PE",
         "fixed": false,
         "global": true,
@@ -11872,33 +11898,33 @@
   },
   "ratesUSD": {
     "USD": 1,
-    "AUD": 1.3942,
-    "BRL": 5.1108,
-    "CAD": 1.3858,
-    "CHF": 0.8153,
-    "CNY": 6.7082,
-    "CZK": 20.932,
-    "DKK": 6.4482,
-    "EUR": 0.86266,
-    "GBP": 0.7403,
-    "HKD": 7.842,
-    "HUF": 314.4,
-    "IDR": 17603,
-    "ILS": 3.0453,
-    "INR": 95.56,
-    "ISK": 120.43,
-    "JPY": 154.04,
-    "KRW": 1342.79,
-    "MXN": 16.9771,
-    "MYR": 4.0705,
-    "NOK": 9.2999,
-    "NZD": 1.7179,
-    "PHP": 62.629,
-    "PLN": 3.731,
-    "SEK": 9.694,
-    "SGD": 1.2679,
-    "THB": 33.065,
-    "TRY": 48.596,
-    "ZAR": 16.1587
+    "AUD": 1.4045,
+    "BRL": 5.1359,
+    "CAD": 1.401,
+    "CHF": 0.82565,
+    "CNY": 6.6976,
+    "CZK": 21.238,
+    "DKK": 6.523,
+    "EUR": 0.8726,
+    "GBP": 0.74939,
+    "HKD": 7.8449,
+    "HUF": 317.87,
+    "IDR": 17823,
+    "ILS": 3.0377,
+    "INR": 95.88,
+    "ISK": 121.64,
+    "JPY": 157.89,
+    "KRW": 1388.1,
+    "MXN": 17.1776,
+    "MYR": 4.0805,
+    "NOK": 9.4324,
+    "NZD": 1.7511,
+    "PHP": 62.803,
+    "PLN": 3.8076,
+    "SEK": 9.853,
+    "SGD": 1.2784,
+    "THB": 33.355,
+    "TRY": 48.785,
+    "ZAR": 16.2724
   }
 }
