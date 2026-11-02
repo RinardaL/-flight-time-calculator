@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T10:46:16.905Z",
+  "generatedAt": "2026-11-02T13:07:30.164Z",
   "year": 2026,
   "holidaysByCountry": {
     "AE": null,
@@ -4845,7 +4845,7 @@
       },
       {
         "date": "2026-01-19",
-        "localName": "ნათლისღება",
+        "localName": "ጥምቀት",
         "name": "Epiphany (Orthodox)",
         "countryCode": "ET",
         "fixed": false,
@@ -7980,6 +7980,19 @@
         ]
       },
       {
+        "date": "2026-10-31",
+        "localName": "Aid Al Wahda",
+        "name": "Unity Day",
+        "countryCode": "MA",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
         "date": "2026-11-06",
         "localName": "Eid Al Massira Al Khadra",
         "name": "Green March",
@@ -8326,7 +8339,7 @@
         "counties": null,
         "launchYear": null,
         "types": [
-          "Public"
+          "School"
         ]
       },
       {
@@ -8365,7 +8378,7 @@
         "counties": null,
         "launchYear": null,
         "types": [
-          "Public"
+          "Observance"
         ]
       },
       {
@@ -9048,7 +9061,7 @@
     "PA": [
       {
         "date": "2026-01-01",
-        "localName": "New Year's Day",
+        "localName": "Año Nuevo",
         "name": "New Year's Day",
         "countryCode": "PA",
         "fixed": false,
@@ -9061,8 +9074,8 @@
       },
       {
         "date": "2026-01-09",
-        "localName": "Martyr's Day",
-        "name": "Martyr's Day",
+        "localName": "Día de los Mártires",
+        "name": "Martyrs' Day",
         "countryCode": "PA",
         "fixed": false,
         "global": true,
@@ -9074,8 +9087,8 @@
       },
       {
         "date": "2026-02-16",
-        "localName": "Carnival",
-        "name": "Carnival",
+        "localName": "Lunes de Carnaval",
+        "name": "Carnival Monday",
         "countryCode": "PA",
         "fixed": false,
         "global": true,
@@ -9087,8 +9100,8 @@
       },
       {
         "date": "2026-02-17",
-        "localName": "Carnival",
-        "name": "Carnival",
+        "localName": "Martes de Carnaval",
+        "name": "Carnival Tuesday",
         "countryCode": "PA",
         "fixed": false,
         "global": true,
@@ -9100,7 +9113,7 @@
       },
       {
         "date": "2026-04-03",
-        "localName": "Good Friday",
+        "localName": "Viernes Santo",
         "name": "Good Friday",
         "countryCode": "PA",
         "fixed": false,
@@ -9113,7 +9126,7 @@
       },
       {
         "date": "2026-05-01",
-        "localName": "Labour Day",
+        "localName": "Día del Trabajo",
         "name": "Labour Day",
         "countryCode": "PA",
         "fixed": false,
@@ -9126,7 +9139,7 @@
       },
       {
         "date": "2026-11-03",
-        "localName": "Separation Day",
+        "localName": "Separación de Panamá de Colombia",
         "name": "Separation Day",
         "countryCode": "PA",
         "fixed": false,
@@ -9139,7 +9152,7 @@
       },
       {
         "date": "2026-11-04",
-        "localName": "Flag Day",
+        "localName": "Día de los Símbolos Patrios",
         "name": "Flag Day",
         "countryCode": "PA",
         "fixed": false,
@@ -9147,13 +9160,14 @@
         "counties": null,
         "launchYear": null,
         "types": [
-          "Public"
+          "School",
+          "Authorities"
         ]
       },
       {
         "date": "2026-11-05",
-        "localName": "Colón Day",
-        "name": "Colon Day",
+        "localName": "Consolidación de la Separación de Panamá de Colombia",
+        "name": "Consolidation of the Separation Day",
         "countryCode": "PA",
         "fixed": false,
         "global": true,
@@ -9165,7 +9179,7 @@
       },
       {
         "date": "2026-11-10",
-        "localName": "Shout in Villa de los Santos",
+        "localName": "Primer Grito de Independencia de la Villa de Los Santos",
         "name": "Shout in Villa de los Santos",
         "countryCode": "PA",
         "fixed": false,
@@ -9178,7 +9192,7 @@
       },
       {
         "date": "2026-11-28",
-        "localName": "Independence Day",
+        "localName": "Independencia de Panamá de España",
         "name": "Independence Day",
         "countryCode": "PA",
         "fixed": false,
@@ -9191,7 +9205,7 @@
       },
       {
         "date": "2026-12-08",
-        "localName": "Mother's Day",
+        "localName": "Día de las Madres",
         "name": "Mother's Day",
         "countryCode": "PA",
         "fixed": false,
@@ -9203,8 +9217,21 @@
         ]
       },
       {
+        "date": "2026-12-21",
+        "localName": "Día de Duelo Nacional",
+        "name": "National Day of Mourning",
+        "countryCode": "PA",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
         "date": "2026-12-25",
-        "localName": "Christmas Day",
+        "localName": "Navidad",
         "name": "Christmas Day",
         "countryCode": "PA",
         "fixed": false,
@@ -9283,6 +9310,19 @@
         ]
       },
       {
+        "date": "2026-06-07",
+        "localName": "Batalla de Arica y Día de la Bandera",
+        "name": "Battle of Arica and Flag Day",
+        "countryCode": "PE",
+        "fixed": false,
+        "global": true,
+        "counties": null,
+        "launchYear": null,
+        "types": [
+          "Public"
+        ]
+      },
+      {
         "date": "2026-06-29",
         "localName": "Día de San Pedro y San Pablo",
         "name": "Saint Peter and Saint Paul",
@@ -9310,7 +9350,7 @@
       },
       {
         "date": "2026-07-28",
-        "localName": "Día de la Independencia",
+        "localName": "Fiestas Patrias",
         "name": "Independence Day",
         "countryCode": "PE",
         "fixed": false,
@@ -9323,7 +9363,7 @@
       },
       {
         "date": "2026-07-29",
-        "localName": "Día de la Independencia",
+        "localName": "Fiestas Patrias",
         "name": "Independence Day",
         "countryCode": "PE",
         "fixed": false,
@@ -11924,33 +11964,33 @@
   },
   "ratesUSD": {
     "USD": 1,
-    "AUD": 1.424,
-    "BRL": 5.0465,
-    "CAD": 1.3995,
-    "CHF": 0.82435,
-    "CNY": 6.6702,
-    "CZK": 21.734,
-    "DKK": 6.6781,
-    "EUR": 0.89342,
-    "GBP": 0.74804,
-    "HKD": 7.8436,
-    "HUF": 327.64,
-    "IDR": 18108,
-    "ILS": 3.1215,
-    "INR": 94.94,
-    "ISK": 121.68,
-    "JPY": 156.8,
-    "KRW": 1324.45,
-    "MXN": 18.7823,
-    "MYR": 4.0855,
-    "NOK": 9.3509,
-    "NZD": 1.7584,
-    "PHP": 63.642,
-    "PLN": 3.9261,
-    "SEK": 9.9446,
-    "SGD": 1.2785,
-    "THB": 33.745,
-    "TRY": 49.738,
-    "ZAR": 16.5976
+    "AUD": 1.4236,
+    "BRL": 5.4325,
+    "CAD": 1.3969,
+    "CHF": 0.82295,
+    "CNY": 6.6529,
+    "CZK": 21.798,
+    "DKK": 6.6895,
+    "EUR": 0.89509,
+    "GBP": 0.74633,
+    "HKD": 7.8457,
+    "HUF": 327.9,
+    "IDR": 18148,
+    "ILS": 3.1284,
+    "INR": 94.95,
+    "ISK": 121.73,
+    "JPY": 157.25,
+    "KRW": 1335.27,
+    "MXN": 18.908,
+    "MYR": 4.057,
+    "NOK": 9.2302,
+    "NZD": 1.7743,
+    "PHP": 63.68,
+    "PLN": 3.9418,
+    "SEK": 9.8264,
+    "SGD": 1.2784,
+    "THB": 33.73,
+    "TRY": 49.948,
+    "ZAR": 16.6895
   }
 }
